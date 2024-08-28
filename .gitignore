@@ -30,3 +30,5 @@ replay_pid*
 range-assignor/gradlew
 
 range-assignor/gradle/wrapper/
+
+.DS_Store

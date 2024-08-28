@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  app1:
+    image: your-application-image
+    container_name: app1
+    volumes:
+      - ./config/application-host1.properties:/config/application.properties
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_CONFIG_LOCATION=/config/application.properties
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka1:9092,kafka2:9092,kafka3:9092
+    networks:
+      my_network:
+        ipv4_address: 172.28.1.1
+
+  app2:
+    image: your-application-image
+    container_name: app2
+    volumes:
+      - ./config/application-host2.properties:/config/application.properties
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_CONFIG_LOCATION=/config/application.properties
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka1:9092,kafka2:9092,kafka3:9092
+    networks:
+      my_network:
+        ipv4_address: 172.28.1.2
+
+  app3:
+    image: your-application-image
+    container_name: app3
+    volumes:
+      - ./config/application-host3.properties:/config/application.properties
+    ports:
+      - "8083:8080"
+    environment:
+      - SPRING_CONFIG_LOCATION=/config/application.properties
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka1:9092,kafka2:9092,kafka3:9092
+    networks:
+      my_network:
+        ipv4_address: 172.28.1.3
+
+networks:
+  my_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
